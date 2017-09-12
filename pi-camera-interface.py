@@ -15,8 +15,10 @@ def camera_control():
 @app.route('/record', methods=['POST', 'GET'])
 def record():
     if request.method == 'POST':
+        length = request.form['length'] + '000'
+        print(length)
         timestamp = time.strftime('%H-%M-%S_%Y-%m-%d')
-        subprocess.call(["raspivid","-o", "recordings/pi-{}.h264".format(timestamp)])
+        subprocess.call(["raspivid","-o", "recordings/pi-{}.h264".format(timestamp), "-t", length])
         subprocess.call(["MP4Box", "-add", "recordings/pi-{}.h264".format(timestamp), "recordings/pi-{}.mp4".format(timestamp)])
         subprocess.call(["ffmpeg", "-i", "recordings/pi-{}.mp4".format(timestamp), "-vframes", "1", "thumbs/pi-{}.mp4.jpg".format(timestamp)])
         subprocess.call(["rm", "recordings/pi-{}.h264".format(timestamp)])

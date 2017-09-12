@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 	<head>
 		<title="Pi Camera Interface">
@@ -7,5 +8,9 @@
 		<form action="/" method="post">
 			<input type="submit" value="Record video">
 		</form>
+		<h2>Saved recordings</h2>
+		{% for recording in saved_recordings %}
+		<video src="recordings/{{ recording }}" width="400" height="300" poster="thumbs/{{recording}}.jpg"></video>
+		{% endfor %}	
 	</body>
 </html>

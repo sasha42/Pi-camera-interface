@@ -2,6 +2,12 @@
 <html>
 	<head>
 		<title="Pi Camera Interface">
+		<style>
+		body {
+			width: 100vw
+		}
+
+		</style>
 	</head>
 	<body>
 		<h1>Pi Camera Interface</h1>
@@ -10,9 +16,10 @@
 			<input type="submit" value="Record video" onclick="this.value='Recording..'">
 		</form>
 		<h2>Saved recordings</h2>
-		{% for recording in saved_recordings | sort %}
-		{{recording}}
+		{% for recording in saved_recordings | sort(reverse=True) %}
+		{{recording}}<br>
 		<a href="recordings/{{recording}}"><img src="thumbs/{{ recording }}.jpg" width="400" height="300"/></a><br>
+		<hr>
 		{% endfor %}	
 	</body>
 </html>
